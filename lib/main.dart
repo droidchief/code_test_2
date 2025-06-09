@@ -1,6 +1,3 @@
- import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:get_it/get_it.dart';
 import 'package:code_test/bloc/user_bloc.dart';
 import 'package:code_test/lang.dart';
 import 'package:code_test/sl_initializer.dart';
@@ -8,6 +5,9 @@ import 'package:code_test/tests/first_test.dart';
 import 'package:code_test/tests/fourth_test.dart';
 import 'package:code_test/tests/second_test.dart';
 import 'package:code_test/tests/third_test.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:get_it/get_it.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -78,12 +78,16 @@ class _MyHomePageState extends State<MyHomePage> {
               const SizedBox(height: 16),
               Stack(
                 children: [
-                  ElevatedButton(
+                  (state.user.level < 3)
+                      ? const RequirementPlate(level: 3)
+                      : ElevatedButton(
                     style: const ButtonStyle(
-                      maximumSize: MaterialStatePropertyAll(Size(150, 48)),
+                      maximumSize:
+                      MaterialStatePropertyAll(Size(150, 48)),
                       shape: MaterialStatePropertyAll(
                         RoundedRectangleBorder(
-                          borderRadius: BorderRadius.all(Radius.circular(12)),
+                          borderRadius:
+                          BorderRadius.all(Radius.circular(12)),
                         ),
                       ),
                     ),
@@ -98,10 +102,10 @@ class _MyHomePageState extends State<MyHomePage> {
                       );
                     },
                     child: Center(
-                      child: Text(currentLanguage.translate("secondTest")),
+                      child:
+                      Text(currentLanguage.translate("secondTest")),
                     ),
                   ),
-                  Opacity(opacity: (state.user.level < 3) ? 1 : 0, child: const RequirementPlate(level: 3)),
                 ],
               ),
               const SizedBox(height: 16),
@@ -200,7 +204,9 @@ class RequirementPlate extends StatelessWidget {
       alignment: Alignment.center,
       width: 150,
       height: 48,
-      child: Text(currentLanguage.translate("availableOnDescription").replaceAll("\${level}", "$level")),
+      child: Text(currentLanguage
+          .translate("availableOnDescription")
+          .replaceAll("\${level}", "$level")),
     );
   }
 }

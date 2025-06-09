@@ -1,33 +1,52 @@
 import 'package:flutter/material.dart';
 import 'package:code_test/lang.dart';
 
-class SecondTest extends StatefulWidget {
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:code_test/lang.dart';
+import '../bloc/second_test_bloc.dart';
+import '../bloc/second_test_state.dart';
+
+class SecondTest extends StatelessWidget {
   const SecondTest._();
 
   static Widget provideRoute() {
-    return const SecondTest._();
+    return BlocProvider(
+      create: (_) => SecondTestBloc(),
+      child: const SecondTest._(),
+    );
   }
 
-  @override
-  State<SecondTest> createState() => _SecondTestState();
-}
-
-class _SecondTestState extends State<SecondTest> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: Text(currentLanguage.translate("secondTest")),
       ),
-      body: Center(
-        child: Padding(
-          padding: EdgeInsets.all(24),
-          child: Text(
-            currentLanguage.translate("secondTestIntroduction"),
-            textAlign: TextAlign.center,
-          ),
-        ),
+      body: BlocBuilder<SecondTestBloc, SecondTestState>(
+        builder: (context, state) {
+          return state.when(
+            loading: () => const Center(child: CircularProgressIndicator()),
+            loaded: (data) => ListView.separated(
+              itemCount: data.length,
+              separatorBuilder: (_, __) => const Divider(),
+              itemBuilder: (context, index) {
+                final item = data[index];
+                return Padding(
+                  padding: const EdgeInsets.all(12),
+                  child: Text(
+                    "${item.name} [Level ${item.level}]",
+                    style: TextStyle(
+                      color: item.level > 5 ? Colors.red : Colors.black,
+                    ),
+                  ),
+                );
+              },
+            ),
+          );
+        },
       ),
     );
   }
 }
+
