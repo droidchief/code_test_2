@@ -123,7 +123,7 @@ Fusce ut placerat orci nulla pellentesque. Non diam phasellus vestibulum lorem s
     showDialog(
       context: context,
       builder: (_) => AlertDialog(
-        content: Text("${currentLanguage.translate('beforeBuild:')} $size"),
+        content: Text("${currentLanguage.translate('getSizeBeforeBuild')} $size"),
       ),
     );
 
@@ -136,7 +136,7 @@ Fusce ut placerat orci nulla pellentesque. Non diam phasellus vestibulum lorem s
         showDialog(
           context: context,
           builder: (_) => AlertDialog(
-            content: Text("${currentLanguage.translate('afterBuild:')} ${box.size}"),
+            content: Text("${currentLanguage.translate('getSizeAfterBuild')} ${box.size}"),
           ),
         );
 

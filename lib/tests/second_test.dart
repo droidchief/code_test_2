@@ -23,28 +23,41 @@ class SecondTest extends StatelessWidget {
       appBar: AppBar(
         title: Text(currentLanguage.translate("secondTest")),
       ),
-      body: BlocBuilder<SecondTestBloc, SecondTestState>(
-        builder: (context, state) {
-          return state.when(
-            loading: () => const Center(child: CircularProgressIndicator()),
-            loaded: (data) => ListView.separated(
-              itemCount: data.length,
-              separatorBuilder: (_, __) => const Divider(),
-              itemBuilder: (context, index) {
-                final item = data[index];
-                return Padding(
-                  padding: const EdgeInsets.all(12),
-                  child: Text(
-                    "${item.name} [Level ${item.level}]",
-                    style: TextStyle(
-                      color: item.level > 5 ? Colors.red : Colors.black,
-                    ),
+      body: Column(
+        children: [
+          Container(
+            width: double.infinity,
+            color: Colors.green.withOpacity(0.5),
+            padding: const EdgeInsets.all(16),
+            child: Text(currentLanguage.translate("secondTestIntroduction")),
+          ),
+
+          BlocBuilder<SecondTestBloc, SecondTestState>(
+            builder: (context, state) {
+              return state.when(
+                loading: () => const Center(child: CircularProgressIndicator()),
+                loaded: (data) => Expanded(
+                  child: ListView.separated(
+                    itemCount: data.length,
+                    separatorBuilder: (_, __) => const Divider(),
+                    itemBuilder: (context, index) {
+                      final item = data[index];
+                      return Padding(
+                        padding: const EdgeInsets.all(12),
+                        child: Text(
+                          "${item.name} [Level ${item.level}]",
+                          style: TextStyle(
+                            color: item.level > 5 ? Colors.red : Colors.black,
+                          ),
+                        ),
+                      );
+                    },
                   ),
-                );
-              },
-            ),
-          );
-        },
+                ),
+              );
+            },
+          ),
+        ],
       ),
     );
   }
