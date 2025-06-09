@@ -12,12 +12,13 @@ part of 'first_test_bloc.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
 mixin _$FirstTestState {
   bool get isLoading => throw _privateConstructorUsedError;
   List<FirstTestModel>? get data => throw _privateConstructorUsedError;
+  List<FirstTestModel> get activeData => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $FirstTestStateCopyWith<FirstTestState> get copyWith =>
@@ -30,7 +31,10 @@ abstract class $FirstTestStateCopyWith<$Res> {
           FirstTestState value, $Res Function(FirstTestState) then) =
       _$FirstTestStateCopyWithImpl<$Res, FirstTestState>;
   @useResult
-  $Res call({bool isLoading, List<FirstTestModel>? data});
+  $Res call(
+      {bool isLoading,
+      List<FirstTestModel>? data,
+      List<FirstTestModel> activeData});
 }
 
 /// @nodoc
@@ -48,6 +52,7 @@ class _$FirstTestStateCopyWithImpl<$Res, $Val extends FirstTestState>
   $Res call({
     Object? isLoading = null,
     Object? data = freezed,
+    Object? activeData = null,
   }) {
     return _then(_value.copyWith(
       isLoading: null == isLoading
@@ -58,6 +63,10 @@ class _$FirstTestStateCopyWithImpl<$Res, $Val extends FirstTestState>
           ? _value.data
           : data // ignore: cast_nullable_to_non_nullable
               as List<FirstTestModel>?,
+      activeData: null == activeData
+          ? _value.activeData
+          : activeData // ignore: cast_nullable_to_non_nullable
+              as List<FirstTestModel>,
     ) as $Val);
   }
 }
@@ -70,7 +79,10 @@ abstract class _$$FirstTestStateImplCopyWith<$Res>
       __$$FirstTestStateImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({bool isLoading, List<FirstTestModel>? data});
+  $Res call(
+      {bool isLoading,
+      List<FirstTestModel>? data,
+      List<FirstTestModel> activeData});
 }
 
 /// @nodoc
@@ -86,6 +98,7 @@ class __$$FirstTestStateImplCopyWithImpl<$Res>
   $Res call({
     Object? isLoading = null,
     Object? data = freezed,
+    Object? activeData = null,
   }) {
     return _then(_$FirstTestStateImpl(
       isLoading: null == isLoading
@@ -96,6 +109,10 @@ class __$$FirstTestStateImplCopyWithImpl<$Res>
           ? _value._data
           : data // ignore: cast_nullable_to_non_nullable
               as List<FirstTestModel>?,
+      activeData: null == activeData
+          ? _value._activeData
+          : activeData // ignore: cast_nullable_to_non_nullable
+              as List<FirstTestModel>,
     ));
   }
 }
@@ -104,8 +121,11 @@ class __$$FirstTestStateImplCopyWithImpl<$Res>
 
 class _$FirstTestStateImpl extends _FirstTestState {
   const _$FirstTestStateImpl(
-      {this.isLoading = false, final List<FirstTestModel>? data = null})
+      {this.isLoading = false,
+      final List<FirstTestModel>? data = null,
+      final List<FirstTestModel> activeData = const []})
       : _data = data,
+        _activeData = activeData,
         super._();
 
   @override
@@ -122,24 +142,38 @@ class _$FirstTestStateImpl extends _FirstTestState {
     return EqualUnmodifiableListView(value);
   }
 
+  final List<FirstTestModel> _activeData;
   @override
-  String toString() {
-    return 'FirstTestState(isLoading: $isLoading, data: $data)';
+  @JsonKey()
+  List<FirstTestModel> get activeData {
+    if (_activeData is EqualUnmodifiableListView) return _activeData;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_activeData);
   }
 
   @override
-  bool operator ==(dynamic other) {
+  String toString() {
+    return 'FirstTestState(isLoading: $isLoading, data: $data, activeData: $activeData)';
+  }
+
+  @override
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$FirstTestStateImpl &&
             (identical(other.isLoading, isLoading) ||
                 other.isLoading == isLoading) &&
-            const DeepCollectionEquality().equals(other._data, _data));
+            const DeepCollectionEquality().equals(other._data, _data) &&
+            const DeepCollectionEquality()
+                .equals(other._activeData, _activeData));
   }
 
   @override
   int get hashCode => Object.hash(
-      runtimeType, isLoading, const DeepCollectionEquality().hash(_data));
+      runtimeType,
+      isLoading,
+      const DeepCollectionEquality().hash(_data),
+      const DeepCollectionEquality().hash(_activeData));
 
   @JsonKey(ignore: true)
   @override
@@ -152,13 +186,16 @@ class _$FirstTestStateImpl extends _FirstTestState {
 abstract class _FirstTestState extends FirstTestState {
   const factory _FirstTestState(
       {final bool isLoading,
-      final List<FirstTestModel>? data}) = _$FirstTestStateImpl;
+      final List<FirstTestModel>? data,
+      final List<FirstTestModel> activeData}) = _$FirstTestStateImpl;
   const _FirstTestState._() : super._();
 
   @override
   bool get isLoading;
   @override
   List<FirstTestModel>? get data;
+  @override
+  List<FirstTestModel> get activeData;
   @override
   @JsonKey(ignore: true)
   _$$FirstTestStateImplCopyWith<_$FirstTestStateImpl> get copyWith =>

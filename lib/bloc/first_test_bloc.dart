@@ -23,7 +23,7 @@ class _FirstTestBlocImpl extends Cubit<FirstTestState> implements FirstTestBloc 
   void _init() {
     emit(state.copyWith(isLoading: true));
     final data = <FirstTestModel>[];
-    for (var i = 0; i < 1000 * 1000; i++) {
+    for (var i = 0; i < 500; i++) {
       data.add(
         FirstTestModel(
           name: faker.person.name(),
@@ -32,7 +32,8 @@ class _FirstTestBlocImpl extends Cubit<FirstTestState> implements FirstTestBloc 
         ),
       );
     }
+    final activeData = data.where((e) => e.isActive).toList();
 
-    emit(state.copyWith(isLoading: false, data: data));
+    emit(state.copyWith(isLoading: false, data: data, activeData: activeData));
   }
 }

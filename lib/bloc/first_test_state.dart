@@ -7,6 +7,7 @@ class FirstTestState with _$FirstTestState {
   const factory FirstTestState({
     @Default(false) bool isLoading,
     @Default(null) List<FirstTestModel>? data,
+    @Default([]) List<FirstTestModel> activeData,
   }) = _FirstTestState;
 
   static const FirstTestState init = FirstTestState();

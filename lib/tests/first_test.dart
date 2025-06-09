@@ -4,7 +4,6 @@ import 'package:get_it/get_it.dart';
 import 'package:code_test/bloc/first_test_bloc.dart';
 import 'package:code_test/bloc/user_bloc.dart';
 import 'package:code_test/lang.dart';
-import 'package:code_test/models/first_test_model.dart';
 
 class FirstTest extends StatefulWidget {
   const FirstTest._();
@@ -24,12 +23,16 @@ class _FirstTestState extends State<FirstTest> {
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<FirstTestBloc, FirstTestState>(
-      builder: (BuildContext context, FirstTestState firstTestState) {
+      builder: (context, firstTestState) {
         return BlocBuilder<UserBloc, UserState>(
-          builder: (BuildContext context, UserState userState) {
+          builder: (context, userState) {
             return Scaffold(
               appBar: AppBar(
-                title: Text(currentLanguage.translate("yourLevel").replaceAll("\${level}", "${userState.user.level}")),
+                title: Text(
+                  currentLanguage
+                      .translate("yourLevel")
+                      .replaceAll("\${level}", "${userState.user.level}"),
+                ),
                 actions: [
                   IconButton(
                     onPressed: () {
@@ -39,58 +42,44 @@ class _FirstTestState extends State<FirstTest> {
                   ),
                 ],
               ),
-              body: (firstTestState.isLoading)
+              body: firstTestState.isLoading
                   ? const Center(child: CircularProgressIndicator())
                   : Column(
-                      children: [
-                        Container(
-                          width: double.infinity,
-                          color: Colors.green.withOpacity(0.5),
+                children: [
+                  Container(
+                    width: double.infinity,
+                    color: Colors.green.withOpacity(0.5),
+                    padding: const EdgeInsets.all(16),
+                    child: Text(currentLanguage.translate("firstTestIntroduction")),
+                  ),
+                  Expanded(
+                    child: ListView.separated(
+                      itemCount: firstTestState.activeData.length,
+                      cacheExtent: 300,
+                      separatorBuilder: (_, __) => const Divider(height: 1),
+                      itemBuilder: (context, index) {
+                        final data = firstTestState.activeData[index];
+                        final isLocked = data.level > userState.user.level;
+
+                        return Padding(
                           padding: const EdgeInsets.all(16),
-                          child: Text(currentLanguage.translate("firstTestIntroduction")),
-                        ),
-                        Expanded(
-                          child: ListView.separated(
-                            itemCount: firstTestState.activeData.length,
-                            separatorBuilder: (_, __) => Container(
-                              height: 1,
-                              color: Colors.grey,
-                              margin: const EdgeInsets.symmetric(horizontal: 16),
+                          child: Text(
+                            "${data.name} [Level ${data.level}]",
+                            style: TextStyle(
+                              fontSize: 14,
+                              color: isLocked ? Colors.red : null,
                             ),
-                            itemBuilder: (BuildContext context, int index) {
-                              return Padding(
-                                padding: const EdgeInsets.all(16),
-                                child: Builder(
-                                  builder: (BuildContext context) {
-                                    final data = firstTestState.activeData[index];
-
-                                    if (data.level > userState.user.level) {
-                                      return Text(
-                                        "${data.name} [Level ${data.level}]",
-                                        style: const TextStyle(fontSize: 14, color: Colors.red),
-                                      );
-                                    }
-
-                                    return Text("${data.name} [Level ${data.level}]");
-                                  },
-                                ),
-                              );
-                            },
                           ),
-                        ),
-                      ],
+                        );
+                      },
                     ),
+                  ),
+                ],
+              ),
             );
           },
         );
       },
     );
-  }
-}
-
-extension FirstTestStateExt on FirstTestState {
-  List<FirstTestModel> get activeData {
-    if (data == null) return <FirstTestModel>[];
-    return data!.where((element) => element.isActive).toList();
   }
 }
