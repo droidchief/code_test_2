@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:code_test/lang.dart';
 
+import '../utils.dart';
+
 class ThirdTest extends StatefulWidget {
   const ThirdTest._();
 
@@ -13,57 +15,8 @@ class ThirdTest extends StatefulWidget {
 }
 
 class _ThirdTestState extends State<ThirdTest> {
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(currentLanguage.translate("thirdTest")),
-      ),
-      body: Center(
-        child: Padding(
-          padding: const EdgeInsets.all(24),
-          child: Column(
-            children: [
-              Text(
-                currentLanguage.translate("thirdTestIntroduction"),
-                textAlign: TextAlign.center,
-              ),
-              const SizedBox(height: 16),
-              SingleChildScrollView(
-                scrollDirection: Axis.horizontal,
-                child: Row(
-                  children: [
-                    ElevatedButton(
-                      onPressed: () {},
-                      child: Text(currentLanguage.translate("getSizeBeforeBuild")),
-                    ),
-                    const SizedBox(width: 16),
-                    ElevatedButton(
-                      onPressed: () {},
-                      child: Text(currentLanguage.translate("getSizeAfterBuild")),
-                    ),
-                  ],
-                ),
-              ),
-              const SizedBox(height: 16),
-              const Expanded(
-                child: SingleChildScrollView(
-                  child: Text(
-                    reallyLongLoremIpsum,
-                    textAlign: TextAlign.center,
-                  ),
-                ),
-              ),
-            ],
-          ),
-        ),
-      ),
-    );
-  }
-}
-
-const reallyLongLoremIpsum =
-    """Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Suspendisse potenti nullam ac tortor vitae purus faucibus. Enim sed faucibus turpis in eu mi bibendum. Pharetra et ultrices neque ornare aenean euismod. Dolor morbi non arcu risus quis varius quam quisque id. Velit ut tortor pretium viverra. Enim eu turpis egestas pretium aenean pharetra magna ac. Consectetur a erat nam at lectus urna duis convallis convallis. Velit sed ullamcorper morbi tincidunt ornare massa eget. Tellus mauris a diam maecenas sed enim. Faucibus ornare suspendisse sed nisi lacus. Tellus elementum sagittis vitae et. Facilisis leo vel fringilla est ullamcorper eget nulla facilisi etiam. Dolor sit amet consectetur adipiscing elit pellentesque habitant morbi tristique. Tortor consequat id porta nibh venenatis cras sed. Ornare quam viverra orci sagittis eu volutpat odio facilisis mauris. Quam vulputate dignissim suspendisse in est ante in. Justo nec ultrices dui sapien eget mi proin sed. Adipiscing elit pellentesque habitant morbi. Ultricies integer quis auctor elit sed vulputate mi sit amet.
+  final String reallyLongLoremIpsum =
+  """Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Suspendisse potenti nullam ac tortor vitae purus faucibus. Enim sed faucibus turpis in eu mi bibendum. Pharetra et ultrices neque ornare aenean euismod. Dolor morbi non arcu risus quis varius quam quisque id. Velit ut tortor pretium viverra. Enim eu turpis egestas pretium aenean pharetra magna ac. Consectetur a erat nam at lectus urna duis convallis convallis. Velit sed ullamcorper morbi tincidunt ornare massa eget. Tellus mauris a diam maecenas sed enim. Faucibus ornare suspendisse sed nisi lacus. Tellus elementum sagittis vitae et. Facilisis leo vel fringilla est ullamcorper eget nulla facilisi etiam. Dolor sit amet consectetur adipiscing elit pellentesque habitant morbi tristique. Tortor consequat id porta nibh venenatis cras sed. Ornare quam viverra orci sagittis eu volutpat odio facilisis mauris. Quam vulputate dignissim suspendisse in est ante in. Justo nec ultrices dui sapien eget mi proin sed. Adipiscing elit pellentesque habitant morbi. Ultricies integer quis auctor elit sed vulputate mi sit amet.
 
 Quisque non tellus orci ac auctor augue. Congue mauris rhoncus aenean vel. Amet justo donec enim diam vulputate. Molestie at elementum eu facilisis sed odio morbi quis. Imperdiet sed euismod nisi porta lorem mollis aliquam. Etiam erat velit scelerisque in dictum. Nec nam aliquam sem et tortor consequat id porta nibh. Placerat in egestas erat imperdiet sed euismod nisi. Lacus viverra vitae congue eu consequat. Non sodales neque sodales ut etiam sit amet nisl purus.
 
@@ -162,3 +115,84 @@ Praesent tristique magna sit amet purus gravida. Augue lacus viverra vitae congu
 Porttitor rhoncus dolor purus non enim praesent elementum facilisis. Ac odio tempor orci dapibus ultrices. Neque sodales ut etiam sit amet nisl purus in mollis. Quis lectus nulla at volutpat diam ut. Ut placerat orci nulla pellentesque dignissim enim sit amet. Fermentum posuere urna nec tincidunt praesent semper. Integer malesuada nunc vel risus commodo viverra maecenas accumsan lacus. Eget nunc scelerisque viverra mauris. Tortor consequat id porta nibh. Faucibus nisl tincidunt eget nullam non nisi est sit. Neque sodales ut etiam sit amet. Nunc id cursus metus aliquam eleifend mi in. Tellus integer feugiat scelerisque varius morbi enim nunc faucibus. Tristique senectus et netus et malesuada fames ac turpis egestas. Volutpat odio facilisis mauris sit amet massa vitae tortor condimentum. In ante metus dictum at tempor commodo ullamcorper. Velit egestas dui id ornare arcu odio ut sem nulla.
 
 Fusce ut placerat orci nulla pellentesque. Non diam phasellus vestibulum lorem sed risus ultricies tristique. Sit amet tellus cras adipiscing enim eu. Suscipit adipiscing bibendum est ultricies integer quis auctor elit. Cras adipiscing enim eu turpis. Orci eu lobortis elementum nibh tellus. Cras ornare arcu dui vivamus arcu felis bibendum ut tristique. Urna id volutpat lacus laoreet non. In hendrerit gravida rutrum quisque. Aliquam etiam erat velit scelerisque in dictum. Cras ornare arcu dui vivamus arcu felis bibendum ut tristique.""";
+  final GlobalKey _textKey = GlobalKey();
+  final TextStyle textStyle = const TextStyle(fontSize: 16);
+
+  void getSizeBeforeBuild() {
+    final size = getTextSizeBeforeBuild(reallyLongLoremIpsum, textStyle, MediaQuery.of(context).size.width - 48); // considering padding
+    showDialog(
+      context: context,
+      builder: (_) => AlertDialog(
+        content: Text("${currentLanguage.translate('beforeBuild:')} $size"),
+      ),
+    );
+
+  }
+
+  void getSizeAfterBuild() {
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      final box = _textKey.currentContext?.findRenderObject() as RenderBox?;
+      if (box != null) {
+        showDialog(
+          context: context,
+          builder: (_) => AlertDialog(
+            content: Text("${currentLanguage.translate('afterBuild:')} ${box.size}"),
+          ),
+        );
+
+      }
+    });
+    setState(() {});
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text(currentLanguage.translate("thirdTest")),
+      ),
+      body: Center(
+        child: Padding(
+          padding: const EdgeInsets.all(24),
+          child: Column(
+            children: [
+              Text(
+                currentLanguage.translate("thirdTestIntroduction"),
+                textAlign: TextAlign.center,
+              ),
+              const SizedBox(height: 16),
+              SingleChildScrollView(
+                scrollDirection: Axis.horizontal,
+                child: Row(
+                  children: [
+                    ElevatedButton(
+                      onPressed: getSizeBeforeBuild,
+                      child: Text(currentLanguage.translate("getSizeBeforeBuild")),
+                    ),
+                    const SizedBox(width: 16),
+                    ElevatedButton(
+                      onPressed: getSizeAfterBuild,
+                      child: Text(currentLanguage.translate("getSizeAfterBuild")),
+                    ),
+                  ],
+                ),
+              ),
+              const SizedBox(height: 16),
+              Expanded(
+                child: SingleChildScrollView(
+                  child: Text(
+                    key: _textKey,
+                    reallyLongLoremIpsum,
+                    textAlign: TextAlign.center,
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+

@@ -13,6 +13,8 @@ enum SupportedLanguage {
     "availableOnDescription": "Available on level \${level}",
     "yourLevel": "Your level: \${level}",
     "getSizeBeforeBuild": "Get size before build",
+    "beforeBuild:": "Get size before build",
+    "afterBuild:": "Get size after build",
     "getSizeAfterBuild": "Get size after build",
     "firstTestIntroduction": "Did you notice the slowness when scrolling? Try to fix it.",
     "secondTestIntroduction":
