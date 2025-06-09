@@ -78,34 +78,34 @@ class _MyHomePageState extends State<MyHomePage> {
               const SizedBox(height: 16),
               Stack(
                 children: [
-                  (state.user.level < 3)
-                      ? const RequirementPlate(level: 3)
-                      : ElevatedButton(
-                    style: const ButtonStyle(
-                      maximumSize:
-                      MaterialStatePropertyAll(Size(150, 48)),
-                      shape: MaterialStatePropertyAll(
-                        RoundedRectangleBorder(
-                          borderRadius:
-                          BorderRadius.all(Radius.circular(12)),
-                        ),
-                      ),
-                    ),
-                    onPressed: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (BuildContext context) {
-                            return SecondTest.provideRoute();
+                  state.user.level == 3
+                      ? ElevatedButton(
+                          style: const ButtonStyle(
+                            maximumSize:
+                                MaterialStatePropertyAll(Size(150, 48)),
+                            shape: MaterialStatePropertyAll(
+                              RoundedRectangleBorder(
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(12)),
+                              ),
+                            ),
+                          ),
+                          onPressed: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (BuildContext context) {
+                                  return SecondTest.provideRoute();
+                                },
+                              ),
+                            );
                           },
-                        ),
-                      );
-                    },
-                    child: Center(
-                      child:
-                      Text(currentLanguage.translate("secondTest")),
-                    ),
-                  ),
+                          child: Center(
+                            child:
+                                Text(currentLanguage.translate("secondTest")),
+                          ),
+                        )
+                      : const RequirementPlate(level: 3)
                 ],
               ),
               const SizedBox(height: 16),
