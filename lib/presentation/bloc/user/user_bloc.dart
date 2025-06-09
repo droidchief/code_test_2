@@ -3,10 +3,13 @@ import 'dart:math';
 import 'package:faker/faker.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:code_test/core.dart';
-import 'package:code_test/models/user.dart';
+import '../../../data/models/first_test_model.dart';
 import 'package:injectable/injectable.dart';
 import 'package:json_annotation/json_annotation.dart';
 import 'package:meta/meta.dart';
+
+import '../../../data/models/user.dart';
+
 
 part 'user_bloc.freezed.dart';
 

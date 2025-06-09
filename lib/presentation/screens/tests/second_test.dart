@@ -4,8 +4,9 @@ import 'package:code_test/lang.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:code_test/lang.dart';
-import '../bloc/second_test_bloc.dart';
-import '../bloc/second_test_state.dart';
+
+import '../../bloc/second_test/second_test_bloc.dart';
+import '../../bloc/second_test/second_test_state.dart';
 
 class SecondTest extends StatelessWidget {
   const SecondTest._();

@@ -1,0 +1,19 @@
+{
+  "@@locale": "en",
+  "english": "English",
+  "bengali": "Bengali",
+  "firstTest": "First test",
+  "secondTest": "Second test",
+  "thirdTest": "Third test",
+  "fourthTest": "Fourth test",
+  "buttonIntroduction": "Each button should be clickable\nSome may have requirement of level\nSome you have to figure it couldn't be clicked",
+  "floatingButtonDescription": "By clicking on the + button,\nyour level will either increase / decrease randomly.\n\nYou are now on level: {level}",
+  "availableOnDescription": "Available on level {level}",
+  "yourLevel": "Your level: {level}",
+  "getSizeBeforeBuild": "Get size before build",
+  "getSizeAfterBuild": "Get size after build",
+  "firstTestIntroduction": "The slowness issue while scrolling has been optimized for a smoother experience.",
+  "secondTestIntroduction": "The performance lag when generating large data has been resolved by refactoring the logic with isolates for efficient computation.",
+  "thirdTestIntroduction": "Buttons above demonstrate how to retrieve the text's size before and after build using Flutter layout tools.",
+  "fourthTestIntroduction": "We implemented a very simple localization for this project, and the folder structure is a bit messy. If you can, please redefine the folder structure using Clean Architecture principal, and use Flutter's proper localization to replace our simple localization."
+}

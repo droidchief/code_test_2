@@ -1,6 +1,6 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter/foundation.dart';
-import '../models/first_test_model.dart';
+import '../../../data/models/first_test_model.dart';
 import 'second_test_state.dart';
 import 'package:faker/faker.dart';
 

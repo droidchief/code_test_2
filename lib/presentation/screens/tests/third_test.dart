@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:code_test/lang.dart';
 
-import '../utils.dart';
+import '../../../core/utils/helpers.dart';
+
 
 class ThirdTest extends StatefulWidget {
   const ThirdTest._();
